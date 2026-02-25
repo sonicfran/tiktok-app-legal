@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TikTok OAuth Callback</title>
+    <style>body{font-family:Arial,sans-serif;max-width:500px;margin:80px auto;text-align:center;color:#333}h2{color:#111}.code{background:#f0f0f0;padding:10px;border-radius:5px;font-family:monospace;word-break:break-all;margin:20px 0}</style>
+</head>
+<body>
+    <h2>TikTok Authorization</h2>
+    <p id="msg">Processing...</p>
+    <div id="code-box" style="display:none">
+        <p>Your authorization code:</p>
+        <div class="code" id="auth-code"></div>
+        <p>Copy this code and paste it in the terminal.</p>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        const error = params.get('error');
+        if (code) {
+            document.getElementById('msg').textContent = 'Authorization successful!';
+            document.getElementById('code-box').style.display = 'block';
+            document.getElementById('auth-code').textContent = code;
+        } else if (error) {
+            document.getElementById('msg').textContent = 'Authorization failed: ' + error;
+        } else {
+            document.getElementById('msg').textContent = 'No authorization code received.';
+        }
+    </script>
+</body>
+</html>
